@@ -1,5 +1,5 @@
 === SyntaxHighlighter2 ===
-Contributors: matt, Viper007Bond, mdawaffe, mohanjith
+Contributors: mohanjith
 Tags: code, sourcecode, php, xhtml, html, css
 Requires at least: 2.0
 Stable tag: trunk
@@ -80,6 +80,10 @@ Make sure your theme's footer has `<?php wp_footer(); ?>` somewhere in it, other
 
 Make sure you correctly use the BBCode with a valid language attribute. A malformed usage of it won't result in replacement.
 
+= Is this plugin licensed under GPL? =
+
+Yes, like most plugins in the WordPress plugin directory, if not all. However the SyntaxHighligter javascript library is licensed under LGPLv3.
+
 == Screenshots ==
 
 1. Example code display. Theme default.
@@ -111,6 +115,10 @@ Find `[sourcecode language='css']code here[/sourcecode]` too long to type? Here'
 PHP 5+
 
 == ChangeLog ==
+
+**Version 2.0.2**
+
+* Mention license in readme.txt
 
 **Version 2.0.1**
 

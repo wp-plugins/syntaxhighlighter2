@@ -5,9 +5,9 @@
 Plugin Name:  SyntaxHighlighter2
 Plugin URI:   http://mohanjith.com/wordpress/syntaxhighlighter2.html
 Author URI: http://mohanjith.com/
-Version:      2.0.1
+Version:      2.0.2
 Description:  An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
-Author:       <a href="http://photomatt.net/">Matt</a>, <a href="http://www.viper007bond.com/">Viper007Bond</a>, <a href="http://blogwaffe.com/">mdawaffe</a>, and <a href="http://mohanjith.com/">S H Mohanjith</a>
+Author:       <a href="http://mohanjith.com/">S H Mohanjith</a>
 
 **************************************************************************
 
