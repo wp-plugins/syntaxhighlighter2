@@ -2,7 +2,7 @@
 Contributors: matt, Viper007Bond, mdawaffe, mohanjith
 Tags: code, sourcecode, php, xhtml, html, css
 Requires at least: 2.0
-Stable tag: 2.0.0
+Stable tag: trunk
 Tested up to: 2.7.1
 Donate link: http://mohanjith.com/wordpress
 
@@ -111,6 +111,10 @@ Find `[sourcecode language='css']code here[/sourcecode]` too long to type? Here'
 PHP 5+
 
 == ChangeLog ==
+
+**Version 2.0.1**
+
+* GPL credits
 
 **Version 2.0.0**
 

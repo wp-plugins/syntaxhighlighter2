@@ -5,7 +5,7 @@
 Plugin Name:  SyntaxHighlighter2
 Plugin URI:   http://mohanjith.com/wordpress/syntaxhighlighter2.html
 Author URI: http://mohanjith.com/
-Version:      2.0.0
+Version:      2.0.1
 Description:  An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
 Author:       <a href="http://photomatt.net/">Matt</a>, <a href="http://www.viper007bond.com/">Viper007Bond</a>, <a href="http://blogwaffe.com/">mdawaffe</a>, and <a href="http://mohanjith.com/">S H Mohanjith</a>
 
@@ -13,6 +13,7 @@ Author:       <a href="http://photomatt.net/">Matt</a>, <a href="http://www.vipe
 
 Credits:
 
+* Alex Gorbatchev] ( alexgorbatchev.com ) -- SyntaxHighlighter (The Javascript Library)
 * Matt ( ma.tt ) -- original concept and code on WP.com
 * Viper007Bond ( viper007bond.com ) -- SyntaxHighlighter
 * S H Mohanjith ( mohanjith.com ) -- current plugin version (with theming)
@@ -24,7 +25,25 @@ incorporated his ingenius TinyMCE handling and some other misc. code.
 I (mohanjith) just took the plugin SyntaxHighlighter and upgraded to the
 latest syntaxhighlighter and added theming functionality.
 
-**************************************************************************/
+**************************************************************************
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; version 3 of the License, with the
+    exception of the JQuery JavaScript framework which is released
+    under it's own license.  You may view the details of that license in
+    the prototype.js file.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+*/
 
 class SyntaxHighlighter2 {
 	private $languages = array();
