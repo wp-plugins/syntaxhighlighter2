@@ -13,7 +13,7 @@ Author:       <a href="http://photomatt.net/">Matt</a>, <a href="http://www.vipe
 
 Credits:
 
-* Alex Gorbatchev] ( alexgorbatchev.com ) -- SyntaxHighlighter (The Javascript Library)
+* Alex Gorbatchev ( alexgorbatchev.com ) -- SyntaxHighlighter (The Javascript Library)
 * Matt ( ma.tt ) -- original concept and code on WP.com
 * Viper007Bond ( viper007bond.com ) -- SyntaxHighlighter
 * S H Mohanjith ( mohanjith.com ) -- current plugin version (with theming)
