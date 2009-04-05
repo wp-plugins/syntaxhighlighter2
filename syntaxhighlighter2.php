@@ -351,7 +351,6 @@ class SyntaxHighlighter2 {
 		return $content;
 	}
 
-
 	// Output the HTML to load all of SyntaxHighlighter's Javascript, CSS, and SWF files
 	public function FileLoader() {
 		?>
@@ -377,10 +376,9 @@ class SyntaxHighlighter2 {
 ?>
 		<div class="wrap">
 		    <h2>SyntaxHighlighter2</h2>
-
 		    <form method="post" action="options.php">
 			    <?php wp_nonce_field('update-options'); ?>
-
+				<iframe src="https://secure.mohanjith.com/wp/syntaxhighlighter2.php" style="float: right; width: 187px; height: 220px;"></iframe>
 			    <table>
 				  <?php foreach ($this->themes as $theme_name=>$theme) { ?>
 			    	<tr valign="top">
