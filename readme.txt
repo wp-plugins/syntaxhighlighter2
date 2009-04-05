@@ -116,6 +116,10 @@ PHP 5+
 
 == ChangeLog ==
 
+**Version 2.0.3**
+
+* Added bash (shell, sh) and patch syntax
+
 **Version 2.0.2**
 
 * Mention license in readme.txt

@@ -5,7 +5,7 @@
 Plugin Name: SyntaxHighlighter2
 Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
 Author URI: http://mohanjith.com/
-Version: 2.0.2
+Version: 2.0.3
 Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
 Author: S H Mohanjith
 License: GPL
@@ -99,6 +99,7 @@ class SyntaxHighlighter2 {
 			$this->pluginurl = apply_filters( 'syntaxhighlighter2_url', WP_CONTENT_URL . '/plugins/syntaxhighlighter2/files/' );
 		// Define all allowed languages and allow plugins to modify this
 		$this->languages = apply_filters( 'syntaxhighlighter2_languages', array(
+			'bash'       => 'shBrushBash.js',
 			'cpp'        => 'shBrushCpp.js',
 			'c'          => 'shBrushCpp.js',
 			'c++'        => 'shBrushCpp.js',
@@ -114,6 +115,7 @@ class SyntaxHighlighter2 {
 			'js'         => 'shBrushJScript.js',
 			'jscript'    => 'shBrushJScript.js',
 			'javascript' => 'shBrushJScript.js',
+			'patch'      => 'shBrushDiff.js',
 			'perl'       => 'shBrushPerl.js',
 			'php'        => 'shBrushPhp.js',
 			'plain'      => 'shBrushPlain.js',
@@ -124,6 +126,8 @@ class SyntaxHighlighter2 {
 			'rails'      => 'shBrushRuby.js',
 			'ror'        => 'shBrushRuby.js',
 			'scala'      => 'shBrushScala.js',
+			'sh'         => 'shBrushBash.js',
+			'shell'      => 'shBrushBash.js',
 			'sql'        => 'shBrushSql.js',
 			'vb'         => 'shBrushVb.js',
 			'vb.net'     => 'shBrushVb.js',
