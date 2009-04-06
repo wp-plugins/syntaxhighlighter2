@@ -84,6 +84,13 @@ Make sure you correctly use the BBCode with a valid language attribute. A malfor
 
 Yes, like most plugins in the WordPress plugin directory, if not all. However the SyntaxHighligter javascript library is licensed under LGPLv3.
 
+= Can I hide the toolbar, ruler, etc? =
+
+Yes, you can give any of the options mentioned in http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults
+as option attribute. See example bellow.
+
+`[sourcecode language='css' option='toolbar: false;']code here[/sourcecode]`
+
 == Screenshots ==
 
 1. Example code display. Theme default.
@@ -115,6 +122,11 @@ Find `[sourcecode language='css']code here[/sourcecode]` too long to type? Here'
 PHP 5+
 
 == ChangeLog ==
+
+**Version 2.0.4**
+
+* Allow for options. Hide the toolbar, ruler, etc.
+* Select whether to apply the code highlighting to user comments in 'Settings' -> 'SyntaxHighlighter2'
 
 **Version 2.0.3**
 

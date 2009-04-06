@@ -5,7 +5,7 @@
 Plugin Name: SyntaxHighlighter2
 Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
 Author URI: http://mohanjith.com/
-Version: 2.0.3
+Version: 2.0.4
 Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
 Author: S H Mohanjith
 License: GPL
@@ -58,6 +58,9 @@ class SyntaxHighlighter2 {
 
 	// WordPress hooks
 	public function SyntaxHighlighter2() {
+		add_option('syntaxhighlighter2_theme', 'default');
+		add_option('syntaxhighlighter2_post_code_in_posts', 'false');
+		
 		add_action( 'init', array(&$this, 'SetVariables'), 1000 );
 		add_action( 'wp_head', array(&$this, 'AddStylesheet'), 1000 );
 		add_action( 'admin_head', array(&$this, 'AddStylesheet'), 1000 );
@@ -79,12 +82,12 @@ class SyntaxHighlighter2 {
 		add_filter( 'content_save_pre', array(&$this, 'TinyMCEDecode'), 8 );
 		add_filter( 'the_editor_content', array(&$this, 'TinyMCEEncode'), 8 );
 
-		// Uncomment these next lines to allow commenters to post code
-		//add_filter( 'comment_text', array(&$this, 'BBCodeToHTML'), 8 );
-		//add_filter( 'pre_comment_content', array(&$this, 'before_kses_normalization_comment'), 1 );
-		//add_filter( 'pre_comment_content', array(&$this, 'after_kses_normalization_comment'), 11 );
-
-		add_option('syntaxhighlighter2_theme', 'default');
+		if (get_option('syntaxhighlighter2_post_code_in_posts') == 'true') {
+			// Uncomment these next lines to allow commenters to post code
+			add_filter( 'comment_text', array(&$this, 'BBCodeToHTML'), 8 );
+			add_filter( 'pre_comment_content', array(&$this, 'before_kses_normalization_comment'), 1 );
+			add_filter( 'pre_comment_content', array(&$this, 'after_kses_normalization_comment'), 11 );
+		}
 
 		add_filter('admin_menu', array(&$this, 'admin_menu'));
 
@@ -186,8 +189,8 @@ class SyntaxHighlighter2 {
 		if ( $addslashes ) $regex .= '\\\\';
 		$regex .= '([\'"])' . $this->languagesregex;
 		if ( $addslashes ) $regex .= '\\\\';
-		$regex .= '\3\](.*?)\[\/\1e\]/si';
-
+		$regex .= '(\3\s+options=\3(.*)\3|\3)\s+\](.*?)\[\/\1e\]/si';
+		
 		preg_match_all( $regex, $content, $matches, PREG_SET_ORDER );
 
 		return $matches;
@@ -218,7 +221,7 @@ class SyntaxHighlighter2 {
 		if ( ( true === $which_filter || $this->kses_active[$which_filter] ) && $this->CheckForBBCode( $content ) ) {
 			$matches = $this->GetBBCode( $content, $addslashes );
 			foreach( (array) $matches as $match )
-				$content = str_replace( $match[5], htmlspecialchars( $match[5], ENT_QUOTES ), $content );
+				$content = str_replace( $match[7], htmlspecialchars( $match[7], ENT_QUOTES ), $content );
 		}
 		return $content;
 	}
@@ -231,7 +234,7 @@ class SyntaxHighlighter2 {
 		if ( ( true === $which_filter || $this->kses_active[$which_filter] ) && $this->CheckForBBCode( $content ) ) {
 			$matches = $this->GetBBCode( $content, $addslashes );
 			foreach( (array) $matches as $match )
-				$content = str_replace( $match[5], htmlspecialchars_decode( $match[5], ENT_QUOTES ), $content );
+				$content = str_replace( $match[7], htmlspecialchars_decode( $match[7], ENT_QUOTES ), $content );
 		}
 		return $content;
 	}
@@ -243,7 +246,7 @@ class SyntaxHighlighter2 {
 	}
 
 
-	public function after_kses_normalization_comment( $content ) {
+	public function after_kses_normalization_comment( $content ) {	
 		return $this->after_kses_normalization( $content, 'pre_comment_content' );
 	}
 
@@ -304,7 +307,7 @@ class SyntaxHighlighter2 {
 
 		// Loop through each match and decode the code
 		foreach ( (array) $matches as $match ) {
-			$content = str_replace( $match[5], htmlspecialchars_decode( $match[5] ), $content );
+			$content = str_replace( $match[7], htmlspecialchars_decode( $match[7] ), $content );
 		}
 
 		return $content;
@@ -321,12 +324,12 @@ class SyntaxHighlighter2 {
 
 		// Loop through each match and encode the code
 		foreach ( (array) $matches as $match ) {
-			$code = htmlspecialchars( $match[5] );
+			$code = htmlspecialchars( $match[7] );
 			$code = str_replace( '&amp;', '&amp;amp;', $code );
 			$code = str_replace( '&amp;lt;', '&amp;amp;lt;', $code );
 			$code = str_replace( '&amp;gt;', '&amp;amp;gt;', $code );
 
-			$content = str_replace( $match[5], $code, $content );
+			$content = str_replace( $match[7], $code, $content );
 		}
 
 		return $content;
@@ -344,7 +347,8 @@ class SyntaxHighlighter2 {
 		// Loop through each match and replace the BBCode with HTML
 		foreach ( (array) $matches as $match ) {
 			$language = strtolower( $match[4] );
-			$content = str_replace( $match[0], '<pre class="brush: ' . $language . "\">\n" . htmlspecialchars( $match[5], ENT_QUOTES ) . "\n</pre>", $content );
+			$options = strtolower( $match[6] );
+			$content = str_replace( $match[0], "<pre class=\"brush: {$language}; {$options}\">\n" . htmlspecialchars( $match[7], ENT_QUOTES ) . "\n</pre>", $content );
 			$this->jsfiles2load[$this->languages[$language]] = TRUE;
 		}
 
@@ -379,6 +383,15 @@ class SyntaxHighlighter2 {
 		    <form method="post" action="options.php">
 			    <?php wp_nonce_field('update-options'); ?>
 				<iframe src="https://secure.mohanjith.com/wp/syntaxhighlighter2.php" style="float: right; width: 187px; height: 220px;"></iframe>
+				<h3><?php _e('Apply SyntaxHighlighter2 to comments') ?></h3>
+				<table>
+			    	<tr valign="top">
+			            <td><label for="syntaxhighlighter2_post_code_in_posts_yes"><input type="radio" id="syntaxhighlighter2_post_code_in_posts_yes" name="syntaxhighlighter2_post_code_in_posts" value="true" <?php echo ('true' == get_option('syntaxhighlighter2_post_code_in_posts'))?'checked="checked"':''; ?> /> Yes</label></td>
+			            <td><label for="syntaxhighlighter2_post_code_in_posts_no"><input type="radio" id="syntaxhighlighter2_post_code_in_posts_no" name="syntaxhighlighter2_post_code_in_posts" value="false" <?php echo ('false' == get_option('syntaxhighlighter2_post_code_in_posts'))?'checked="checked"':''; ?> /> No</label></td>
+			        </tr>
+			    </table>
+			    
+				<h3><?php _e('Theme') ?></h3>
 			    <table>
 				  <?php foreach ($this->themes as $theme_name=>$theme) { ?>
 			    	<tr valign="top">
@@ -390,7 +403,7 @@ class SyntaxHighlighter2 {
 			    </table>
 
 			    <input type="hidden" name="action" value="update" />
-    			<input type="hidden" name="page_options" value="syntaxhighlighter2_theme"/>
+    			<input type="hidden" name="page_options" value="syntaxhighlighter2_theme,syntaxhighlighter2_post_code_in_posts"/>
 
 			    <p class="submit">
 			    	<input type="submit" name="Submit" value="<?php _e('Save Changes') ?>" />
@@ -413,5 +426,3 @@ if ( !function_exists( 'htmlspecialchars_decode' ) ) {
 		return strtr( $string, array_flip( get_html_translation_table( HTML_SPECIALCHARS, $quote_style) ) );
 	}
 }
-
-?>
