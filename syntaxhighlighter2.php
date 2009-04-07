@@ -1,50 +1,47 @@
-<?php /*
+<?php
+/*
+ Plugin Name: SyntaxHighlighter2
+ Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
+ Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
+ Author: S H Mohanjith
+ Version: 2.0.5
+ Author URI: http://mohanjith.com/
+ Text Domain: syntaxhighlighter2
+ License: GPL
 
-**************************************************************************
+ Credits:
 
-Plugin Name: SyntaxHighlighter2
-Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
-Author URI: http://mohanjith.com/
-Version: 2.0.6
-Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
-Author: S H Mohanjith
-License: GPL
+ * Alex Gorbatchev ( alexgorbatchev.com ) -- SyntaxHighlighter (The Javascript Library)
+ * Matt ( ma.tt ) -- original concept and code on WP.com
+ * Viper007Bond ( viper007bond.com ) -- SyntaxHighlighter
+ * S H Mohanjith ( mohanjith.com ) -- current plugin version (with theming)
 
-**************************************************************************
+ Simply put, Matt and Viper007Bond deserves the majority of the credit for
+ this plugin. Viper007Bond took the plugin Matt had already written (it looked
+ a lot like this current one) after seeing his code operate on WP.com and
+ incorporated his ingenius TinyMCE handling and some other misc. code.
+ I (mohanjith) just took the plugin SyntaxHighlighter and upgraded to the
+ latest syntaxhighlighter and added theming functionality.
 
-Credits:
+ **************************************************************************
 
-* Alex Gorbatchev ( alexgorbatchev.com ) -- SyntaxHighlighter (The Javascript Library)
-* Matt ( ma.tt ) -- original concept and code on WP.com
-* Viper007Bond ( viper007bond.com ) -- SyntaxHighlighter
-* S H Mohanjith ( mohanjith.com ) -- current plugin version (with theming)
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; version 3 of the License, with the
+ exception of the JQuery JavaScript framework which is released
+ under it's own license.  You may view the details of that license in
+ the prototype.js file.
 
-Simply put, Matt and Viper007Bond deserves the majority of the credit for
-this plugin. Viper007Bond took the plugin Matt had already written (it looked
-a lot like this current one) after seeing his code operate on WP.com and
-incorporated his ingenius TinyMCE handling and some other misc. code.
-I (mohanjith) just took the plugin SyntaxHighlighter and upgraded to the
-latest syntaxhighlighter and added theming functionality.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-**************************************************************************
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; version 3 of the License, with the
-    exception of the JQuery JavaScript framework which is released
-    under it's own license.  You may view the details of that license in
-    the prototype.js file.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-*/
+ */
 
 class SyntaxHighlighter2 {
 	private $languages = array();
@@ -60,7 +57,7 @@ class SyntaxHighlighter2 {
 	public function SyntaxHighlighter2() {
 		add_option('syntaxhighlighter2_theme', 'default');
 		add_option('syntaxhighlighter2_post_code_in_posts', 'false');
-		
+
 		add_action( 'init', array(&$this, 'SetVariables'), 1000 );
 		add_action( 'wp_head', array(&$this, 'AddStylesheet'), 1000 );
 		add_action( 'admin_head', array(&$this, 'AddStylesheet'), 1000 );
@@ -99,7 +96,7 @@ class SyntaxHighlighter2 {
 	public function SetVariables() {
 		$this->pluginurl = apply_filters( 'syntaxhighlighter2_url', get_bloginfo( 'wpurl' ) . '/wp-content/plugins/syntaxhighlighter2/files/' );
 		if ( defined( 'WP_CONTENT_URL' ) )
-			$this->pluginurl = apply_filters( 'syntaxhighlighter2_url', WP_CONTENT_URL . '/plugins/syntaxhighlighter2/files/' );
+		$this->pluginurl = apply_filters( 'syntaxhighlighter2_url', WP_CONTENT_URL . '/plugins/syntaxhighlighter2/files/' );
 		// Define all allowed languages and allow plugins to modify this
 		$this->languages = apply_filters( 'syntaxhighlighter2_languages', array(
 			'bash'       => 'shBrushBash.js',
@@ -160,7 +157,7 @@ class SyntaxHighlighter2 {
 			'wp_filter_kses',
 			'wp_filter_post_kses',
 			'wp_filter_nohtml_kses'
-		) );
+			) );
 	}
 
 
@@ -190,7 +187,7 @@ class SyntaxHighlighter2 {
 		$regex .= '([\'"])' . $this->languagesregex;
 		if ( $addslashes ) $regex .= '\\\\';
 		$regex .= '(\3\s*options=\3(.*)\3|\3)\s*\](.*?)\[\/\1e\]/si';
-		
+
 		preg_match_all( $regex, $content, $matches, PREG_SET_ORDER );
 
 		return $matches;
@@ -221,7 +218,7 @@ class SyntaxHighlighter2 {
 		if ( ( true === $which_filter || $this->kses_active[$which_filter] ) && $this->CheckForBBCode( $content ) ) {
 			$matches = $this->GetBBCode( $content, $addslashes );
 			foreach( (array) $matches as $match )
-				$content = str_replace( $match[7], htmlspecialchars( $match[7], ENT_QUOTES ), $content );
+			$content = str_replace( $match[7], htmlspecialchars( $match[7], ENT_QUOTES ), $content );
 		}
 		return $content;
 	}
@@ -234,7 +231,7 @@ class SyntaxHighlighter2 {
 		if ( ( true === $which_filter || $this->kses_active[$which_filter] ) && $this->CheckForBBCode( $content ) ) {
 			$matches = $this->GetBBCode( $content, $addslashes );
 			foreach( (array) $matches as $match )
-				$content = str_replace( $match[7], htmlspecialchars_decode( $match[7], ENT_QUOTES ), $content );
+			$content = str_replace( $match[7], htmlspecialchars_decode( $match[7], ENT_QUOTES ), $content );
 		}
 		return $content;
 	}
@@ -246,7 +243,7 @@ class SyntaxHighlighter2 {
 	}
 
 
-	public function after_kses_normalization_comment( $content ) {	
+	public function after_kses_normalization_comment( $content ) {
 		return $this->after_kses_normalization( $content, 'pre_comment_content' );
 	}
 
@@ -257,7 +254,7 @@ class SyntaxHighlighter2 {
 	public function before_kses_normalization_widget() {
 		global $pagenow;
 		if ( 'widgets.php' != $pagenow || current_user_can( 'unfiltered_html' ) )
-			return;
+		return;
 
 		$i = 1;
 		while ( isset($_POST["text-submit-$i"]) ) {
@@ -271,10 +268,10 @@ class SyntaxHighlighter2 {
 		static $do_update = true;
 
 		if ( !$do_update || current_user_can( 'unfiltered_html' ) )
-			return;
+		return;
 
 		foreach ( array_keys($new) as $i => $widget )
-			$new[$i]['text'] = $this->after_kses_normalization( $new[$i]['text'], true, false );
+		$new[$i]['text'] = $this->after_kses_normalization( $new[$i]['text'], true, false );
 
 		$do_update = false;
 
@@ -287,7 +284,7 @@ class SyntaxHighlighter2 {
 	// Totally lame.  The output of the widget form in the admin screen is cached from before our re-update.
 	public function after_kses_normalization_widget_format_to_edit( $content ) {
 		if ( !$this->widget_format_to_edit )
-			return $content;
+		return $content;
 
 		$content = $this->after_kses_normalization( $content, true, false );
 
@@ -360,22 +357,25 @@ class SyntaxHighlighter2 {
 		?>
 
 <!-- SyntaxHighlighter Stuff -->
-<script type="text/javascript" src="<?php echo $this->pluginurl; ?>shCore.js"></script>
-<?php 
-	if (is_admin()) {
-		foreach ( $this->languages as $foobar => $filename ) : 
+<script
+	type="text/javascript" src="<?php echo $this->pluginurl; ?>shCore.js"></script>
+		<?php
+		if (is_admin()) {
+			foreach ( $this->languages as $foobar => $filename ) :
 			$this->jsfiles2load[$filename] = TRUE;
-		endforeach; 
-	}
-	foreach ( $this->jsfiles2load as $filename => $foobar ) : ?>
-<script type="text/javascript" src="<?php echo $this->pluginurl . $filename; ?>"></script>
-<?php endforeach; ?>
+			endforeach;
+		}
+		foreach ( $this->jsfiles2load as $filename => $foobar ) : ?>
+<script
+	type="text/javascript"
+	src="<?php echo $this->pluginurl . $filename; ?>"></script>
+		<?php endforeach; ?>
 <script type="text/javascript">
 	SyntaxHighlighter.config.clipboardSwf = '<?php echo $this->pluginurl; ?>clipboard.swf';
 	SyntaxHighlighter.all();
 </script>
 
-<?php
+		<?php
 	}
 
 	public function admin_menu() {
@@ -383,47 +383,62 @@ class SyntaxHighlighter2 {
 	}
 
 	public function plugin_options() {
-?>
-		<div class="wrap">
-		    <h2>SyntaxHighlighter2</h2>
-		    <form method="post" action="options.php">
-			    <?php wp_nonce_field('update-options'); ?>
-				<iframe src="https://secure.mohanjith.com/wp/syntaxhighlighter2.php" style="float: right; width: 187px; height: 220px;"></iframe>
-				<h3><?php _e('Apply SyntaxHighlighter2 to comments') ?></h3>
-				<table>
-			    	<tr valign="top">
-			            <td><label for="syntaxhighlighter2_post_code_in_posts_yes"><input type="radio" id="syntaxhighlighter2_post_code_in_posts_yes" name="syntaxhighlighter2_post_code_in_posts" value="true" <?php echo ('true' == get_option('syntaxhighlighter2_post_code_in_posts'))?'checked="checked"':''; ?> /> Yes</label></td>
-			            <td><label for="syntaxhighlighter2_post_code_in_posts_no"><input type="radio" id="syntaxhighlighter2_post_code_in_posts_no" name="syntaxhighlighter2_post_code_in_posts" value="false" <?php echo ('false' == get_option('syntaxhighlighter2_post_code_in_posts'))?'checked="checked"':''; ?> /> No</label></td>
-			        </tr>
-			    </table>
-			    
-				<h3><?php _e('Theme') ?></h3>
-			    <table>
-				  <?php foreach ($this->themes as $theme_name=>$theme) { ?>
-			    	<tr valign="top">
-			            <td><input type="radio" id="syntaxhighlighter2_theme<?php echo $theme_name; ?>" name="syntaxhighlighter2_theme" value="<?php echo $theme_name; ?>" <?php echo ($theme_name == get_option('syntaxhighlighter2_theme'))?'checked="checked"':''; ?> /> </td>
-			            <td> <label for="syntaxhighlighter2_theme<?php echo $theme_name; ?>"><?php _e($theme['description'], self::$translation_domain ); ?></label> </td>
-			            <td> <img src="<?php echo get_bloginfo( 'wpurl' ); ?>/wp-content/plugins/syntaxhighlighter2/previews/sample-<?php echo $theme_name; ?>.png" alt="Preview" width="507" height="34" /> </td>
-			        </tr>
-			      <?php } ?>
-			    </table>
+		?>
+<div class="wrap">
+<h2>SyntaxHighlighter2</h2>
+<form method="post" action="options.php"><?php wp_nonce_field('update-options'); ?>
+<iframe src="https://secure.mohanjith.com/wp/syntaxhighlighter2.php"
+	style="float: right; width: 187px; height: 220px;"></iframe>
+<h3><?php _e('Apply SyntaxHighlighter2 to comments') ?></h3>
+<table>
+	<tr valign="top">
+		<td><label for="syntaxhighlighter2_post_code_in_posts_yes"><input
+			type="radio" id="syntaxhighlighter2_post_code_in_posts_yes"
+			name="syntaxhighlighter2_post_code_in_posts" value="true"
+			<?php echo ('true' == get_option('syntaxhighlighter2_post_code_in_posts'))?'checked="checked"':''; ?> />
+		Yes</label></td>
+		<td><label for="syntaxhighlighter2_post_code_in_posts_no"><input
+			type="radio" id="syntaxhighlighter2_post_code_in_posts_no"
+			name="syntaxhighlighter2_post_code_in_posts" value="false"
+			<?php echo ('false' == get_option('syntaxhighlighter2_post_code_in_posts'))?'checked="checked"':''; ?> />
+		No</label></td>
+	</tr>
+</table>
 
-			    <input type="hidden" name="action" value="update" />
-    			<input type="hidden" name="page_options" value="syntaxhighlighter2_theme,syntaxhighlighter2_post_code_in_posts"/>
+<h3><?php _e('Theme') ?></h3>
+<table>
+<?php foreach ($this->themes as $theme_name=>$theme) { ?>
+	<tr valign="top">
+		<td><input type="radio"
+			id="syntaxhighlighter2_theme<?php echo $theme_name; ?>"
+			name="syntaxhighlighter2_theme" value="<?php echo $theme_name; ?>"
+			<?php echo ($theme_name == get_option('syntaxhighlighter2_theme'))?'checked="checked"':''; ?> />
+		</td>
+		<td><label for="syntaxhighlighter2_theme<?php echo $theme_name; ?>"><?php _e($theme['description'], self::$translation_domain ); ?></label>
+		</td>
+		<td><img
+			src="<?php echo get_bloginfo( 'wpurl' ); ?>/wp-content/plugins/syntaxhighlighter2/previews/sample-<?php echo $theme_name; ?>.png"
+			alt="Preview" width="507" height="34" /></td>
+	</tr>
+	<?php } ?>
+</table>
 
-			    <p class="submit">
-			    	<input type="submit" name="Submit" value="<?php _e('Save Changes') ?>" />
-			    </p>
-	    	</form>
-	    </div>
-<?php
+<input type="hidden" name="action" value="update" /> <input
+	type="hidden" name="page_options"
+	value="syntaxhighlighter2_theme,syntaxhighlighter2_post_code_in_posts" />
+
+<p class="submit"><input type="submit" name="Submit"
+	value="<?php _e('Save Changes') ?>" /></p>
+</form>
+</div>
+	<?php
 	}
 }
 
 // If we're not running in PHP 4, initialize
 if (strpos(phpversion(), '4') !== 0) {
-    // Initiate the plugin class
-    $syntaxhighlighter2 = new SyntaxHighlighter2();
+	// Initiate the plugin class
+	$syntaxhighlighter2 = new SyntaxHighlighter2();
 }
 
 // For those poor souls stuck on PHP4
