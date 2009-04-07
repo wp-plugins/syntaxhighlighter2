@@ -123,6 +123,11 @@ PHP 5+
 
 == ChangeLog ==
 
+**Version 2.0.5**
+
+* Brush not found alert shown in admin section when there is code in user comment
+* If there is no space between ' and ] parser fails
+
 **Version 2.0.4**
 
 * Allow for options. Hide the toolbar, ruler, etc.

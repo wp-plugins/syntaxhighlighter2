@@ -5,7 +5,7 @@
 Plugin Name: SyntaxHighlighter2
 Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
 Author URI: http://mohanjith.com/
-Version: 2.0.4
+Version: 2.0.5
 Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
 Author: S H Mohanjith
 License: GPL
@@ -189,7 +189,7 @@ class SyntaxHighlighter2 {
 		if ( $addslashes ) $regex .= '\\\\';
 		$regex .= '([\'"])' . $this->languagesregex;
 		if ( $addslashes ) $regex .= '\\\\';
-		$regex .= '(\3\s+options=\3(.*)\3|\3)\s+\](.*?)\[\/\1e\]/si';
+		$regex .= '(\3\s*options=\3(.*)\3|\3)\s*\](.*?)\[\/\1e\]/si';
 		
 		preg_match_all( $regex, $content, $matches, PREG_SET_ORDER );
 
@@ -361,7 +361,13 @@ class SyntaxHighlighter2 {
 
 <!-- SyntaxHighlighter Stuff -->
 <script type="text/javascript" src="<?php echo $this->pluginurl; ?>shCore.js"></script>
-<?php foreach ( $this->jsfiles2load as $filename => $foobar ) : ?>
+<?php 
+	if (is_admin()) {
+		foreach ( $this->languages as $foobar => $filename ) : 
+			$this->jsfiles2load[$filename] = TRUE;
+		endforeach; 
+	}
+	foreach ( $this->jsfiles2load as $filename => $foobar ) : ?>
 <script type="text/javascript" src="<?php echo $this->pluginurl . $filename; ?>"></script>
 <?php endforeach; ?>
 <script type="text/javascript">
