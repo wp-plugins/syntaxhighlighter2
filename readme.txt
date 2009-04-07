@@ -2,7 +2,7 @@
 Contributors: mohanjith
 Tags: code, sourcecode, php, xhtml, html, css
 Requires at least: 2.0
-Stable tag: trunk
+Stable tag: 2.0.5
 Tested up to: 2.7.1
 Donate link: http://mohanjith.com/wordpress
 
