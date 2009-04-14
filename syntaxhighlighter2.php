@@ -4,7 +4,7 @@
  Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
  Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
  Author: S H Mohanjith
- Version: 2.0.5
+ Version: 2.0.6
  Author URI: http://mohanjith.com/
  Text Domain: syntaxhighlighter2
  License: GPL
@@ -186,7 +186,7 @@ class SyntaxHighlighter2 {
 		if ( $addslashes ) $regex .= '\\\\';
 		$regex .= '([\'"])' . $this->languagesregex;
 		if ( $addslashes ) $regex .= '\\\\';
-		$regex .= '(\3\s*options=\3(.*)\3|\3)\s*\](.*?)\[\/\1e\]/si';
+		$regex .= '(\3\s*options=\3([a-z0-9\;\-\s:]*)\3|\3)\s*\](.*?)\[\/\1e\]/si';
 
 		preg_match_all( $regex, $content, $matches, PREG_SET_ORDER );
 
