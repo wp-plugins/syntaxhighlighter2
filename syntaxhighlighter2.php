@@ -4,7 +4,7 @@
  Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
  Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
  Author: S H Mohanjith
- Version: 2.0.6
+ Version: 2.1.0
  Author URI: http://mohanjith.com/
  Text Domain: syntaxhighlighter2
  License: GPL
@@ -99,19 +99,25 @@ class SyntaxHighlighter2 {
 		$this->pluginurl = apply_filters( 'syntaxhighlighter2_url', WP_CONTENT_URL . '/plugins/syntaxhighlighter2/files/' );
 		// Define all allowed languages and allow plugins to modify this
 		$this->languages = apply_filters( 'syntaxhighlighter2_languages', array(
+			'as'         => 'shBrushAS3.js',
+                        'as3'        => 'shBrushAS3.js',
 			'bash'       => 'shBrushBash.js',
 			'cpp'        => 'shBrushCpp.js',
 			'c'          => 'shBrushCpp.js',
 			'c++'        => 'shBrushCpp.js',
 			'c#'         => 'shBrushCSharp.js',
+                        'cf'         => 'shBrushColdFusion.js',
+                        'coldfusion' => 'shBrushColdFusion.js',
 			'c-sharp'    => 'shBrushCSharp.js',
 			'csharp'     => 'shBrushCSharp.js',
 			'css'        => 'shBrushCss.js',
 			'delphi'     => 'shBrushDelphi.js',
+                        'erlang'     => 'shBrushErlang.js',
 			'pascal'     => 'shBrushDelphi.js',
 			'diff'       => 'shBrushDiff.js',
 			'groovy'     => 'shBrushGroovy.js',
 			'java'       => 'shBrushJava.js',
+                        'javafx'     => 'shBrushJavaFX.js',
 			'js'         => 'shBrushJScript.js',
 			'jscript'    => 'shBrushJScript.js',
 			'javascript' => 'shBrushJScript.js',
@@ -119,6 +125,7 @@ class SyntaxHighlighter2 {
 			'perl'       => 'shBrushPerl.js',
 			'php'        => 'shBrushPhp.js',
 			'plain'      => 'shBrushPlain.js',
+                        'powershell' => 'shBrushPowerShell.js',
 			'py'         => 'shBrushPython.js',
 			'python'     => 'shBrushPython.js',
 			'rb'         => 'shBrushRuby.js',

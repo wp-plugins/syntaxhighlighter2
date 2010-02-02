@@ -3,8 +3,8 @@ Contributors: mohanjith
 Tags: code, sourcecode, php, xhtml, html, css
 Requires at least: 2.0
 Stable tag: trunk
-Tested up to: 2.7.1
-Donate link: http://mohanjith.com/wordpress
+Tested up to: 2.9.1
+Donate link: http://mohanjith.com/c/wordpress
 
 Easily post source code such as PHP or HTML and display it in a styled box.
 
@@ -14,17 +14,22 @@ SyntaxHighlighter2 allows you to easily post syntax highlighted code all without
 
 It supports the following languages (the alias for use in the post is listed next to the name):
 
+* AS3 -- `as`, `as3`
 * C++ -- `cpp`, `c`, `c++`
 * C# -- `c#`, `c-sharp`, `csharp`
+* ColdFusion - `cf`, `coldfusion`
 * CSS -- `css`
 * Delphi -- `delphi`, `pascal`
 * Diff/Patches -- `diff`
+* Erlang -- `erlang`
 * Groovy -- `groovy`
 * Java -- `java`
+* JavaFX -- `javafx`
 * JavaScript -- `js`, `jscript`, `javascript`
 * Perl -- `perl`
 * PHP -- `php`
 * Plain text -- `plain`
+* PowerShell -- `powershell`
 * Python -- `py`, `python`
 * Ruby -- `rb`, `ruby`, `rails`, `ror`
 * Scala -- `scala`
@@ -122,6 +127,10 @@ Find `[sourcecode language='css']code here[/sourcecode]` too long to type? Here'
 PHP 5+
 
 == ChangeLog ==
+
+**Version 2.1.0**
+
+* Upgraded to SyntaxHighlighter 2.1.364
 
 **Version 2.0.6**
 
