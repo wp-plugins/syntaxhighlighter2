@@ -4,7 +4,7 @@
  Plugin URI: http://mohanjith.com/wordpress/syntaxhighlighter2.html
  Description: An advanced upload-and-activate WordPress implementation of Alex Gorbatchev's <a href="http://code.google.com/p/syntaxhighlighter/">SyntaxHighlighter</a> JavaScript code highlighting package. See WordPress.com's "<a href="http://faq.wordpress.com/2007/09/03/how-do-i-post-source-code/">How do I post source code?</a>" for details.
  Author: S H Mohanjith
- Version: 2.1.0
+ Version: 2.1.1
  Author URI: http://mohanjith.com/
  Text Domain: syntaxhighlighter2
  License: GPL
@@ -151,6 +151,7 @@ class SyntaxHighlighter2 {
 			'fadetogrey' => array('description' => 'Fade to Grey', 'file' => 'shThemeFadeToGrey.css'),
 			'midnight'   => array('description' => 'Midnight', 'file' => 'shThemeMidnight.css'),
 			'rdark'      => array('description' => 'RDark', 'file' => 'shThemeRDark.css'),
+			'eclipse'      => array('description' => 'Eclipse', 'file' => 'shThemeEclipse.css'),
 		) );
 
 		// Quote them to make them regex safe

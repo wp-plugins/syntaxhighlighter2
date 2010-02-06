@@ -104,6 +104,7 @@ as option attribute. See example bellow.
 4. Example code display. Theme fadetogrey.
 5. Example code display. Theme midnight.
 6. Example code display. Theme rdark.
+7. Example code display. Theme eclipse.
 
 == Other BBCode Methods ==
 
@@ -127,6 +128,11 @@ Find `[sourcecode language='css']code here[/sourcecode]` too long to type? Here'
 PHP 5+
 
 == ChangeLog ==
+
+**Version 2.1.1**
+
+* Styling issue after upgrade
+* Theme Eclipse added
 
 **Version 2.1.0**
 
