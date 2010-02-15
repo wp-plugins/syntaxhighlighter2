@@ -3,7 +3,7 @@ Contributors: mohanjith
 Tags: code, sourcecode, php, xhtml, html, css
 Requires at least: 2.0
 Stable tag: trunk
-Tested up to: 2.9.1
+Tested up to: 2.9.2
 Donate link: http://mohanjith.com/c/wordpress
 
 Easily post source code such as PHP or HTML and display it in a styled box.
