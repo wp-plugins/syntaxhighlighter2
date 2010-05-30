@@ -3,7 +3,7 @@ Contributors: mohanjith
 Tags: code, sourcecode, php, xhtml, html, css
 Requires at least: 2.0
 Stable tag: trunk
-Tested up to: 2.9.2
+Tested up to: 3.0.0
 Donate link: http://mohanjith.com/c/wordpress
 
 Easily post source code such as PHP or HTML and display it in a styled box.
@@ -128,6 +128,10 @@ Find `[sourcecode language='css']code here[/sourcecode]` too long to type? Here'
 PHP 5+
 
 == ChangeLog ==
+
+**Version 2.1.2**
+
+* Compatibility with WordPress 3.0
 
 **Version 2.1.1**
 
